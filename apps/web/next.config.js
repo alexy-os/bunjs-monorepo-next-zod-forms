@@ -1,10 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@pnpm-monorepo/ui"],
-  output: 'standalone',
-  experimental: {
-    outputFileTracingRoot: path.join(__dirname, '../../'),
-  }
+  transpilePackages: ["@pnpm-monorepo/ui"]
 }
 
 module.exports = nextConfig 
