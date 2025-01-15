@@ -12,8 +12,8 @@
   ],
   "scripts": {
     "dev": "pnpm --filter @pnpm-monorepo/web dev",
-    "build": "pnpm build:apps",
-    "start": "pnpm start:apps",
+    "build": "pnpm --filter @pnpm-monorepo/ui build && pnpm --filter @pnpm-monorepo/web build",
+    "start": "pnpm --filter @pnpm-monorepo/web start",
     "build:apps": "pnpm --filter @pnpm-monorepo/web build",
     "start:apps": "pnpm --filter @pnpm-monorepo/web start",
     "lint": "pnpm --filter @pnpm-monorepo/web lint",
