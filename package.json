@@ -5,6 +5,7 @@
   "author": "AlexY-OS",
   "license": "MIT",
   "private": true,
+  "packageManager": "pnpm@8.15.3",
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -23,7 +24,7 @@
     "clean": "rm -rf node_modules",
     "clean:all": "rm -rf node_modules **/node_modules"
   },
-  "devDependencies": {
+  "dependencies": {
     "glob": "^11.0.1",
     "tsx": "^4.7.1"
   }
