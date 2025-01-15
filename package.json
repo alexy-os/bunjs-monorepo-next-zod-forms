@@ -1,0 +1,30 @@
+{
+  "name": "pnpm-monorepo-next-shadcn-ui",
+  "description": "Next.js Shadcn/UI Monorepo Starter with PNPM",
+  "version": "0.0.1",
+  "author": "AlexY-OS",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm --filter @pnpm-monorepo/web dev",
+    "build": "pnpm run build:apps",
+    "start": "pnpm run start:apps",
+    "build:packages": "pnpm --filter @pnpm-monorepo/ui build",
+    "build:apps": "pnpm --filter @pnpm-monorepo/web build",
+    "start:apps": "pnpm --filter @pnpm-monorepo/web start",
+    "lint": "pnpm --filter @pnpm-monorepo/web lint",
+    "ui:init": "pnpm dlx shadcn@latest init --cwd packages/ui",
+    "shadcn:add": "pnpm dlx shadcn@latest add --cwd packages/ui",
+    "ui:add": "bash scripts/replaceImport/add-components.sh",
+    "clean": "rm -rf node_modules",
+    "clean:all": "rm -rf node_modules **/node_modules"
+  },
+  "devDependencies": {
+    "glob": "^11.0.1",
+    "tsx": "^4.7.1"
+  }
+}
