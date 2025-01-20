@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import {
   AutoForm as BaseAutoForm,
@@ -16,6 +18,7 @@ import { SelectField } from "./components/SelectField";
 import { ObjectWrapper } from "./components/ObjectWrapper";
 import { ArrayWrapper } from "./components/ArrayWrapper";
 import { ArrayElementWrapper } from "./components/ArrayElementWrapper";
+import { useForm, useFormContext, useFieldArray, FormProvider } from 'react-hook-form'
 
 const ShadcnUIComponents: AutoFormUIComponents = {
   Form,

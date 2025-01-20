@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@bun-monorepo/ui/components/ui/button";
 import {
   Accordion,
