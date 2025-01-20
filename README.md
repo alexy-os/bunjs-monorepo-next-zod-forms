@@ -1,229 +1,58 @@
-# PNPM Monorepo with Next.js and shadcn/ui
+# Turborepo Tailwind CSS starter
 
-## Overview
-A modern monorepo setup powered by PNPM package manager, featuring a Next.js application with shadcn/ui components. This architecture provides a scalable and maintainable structure for building enterprise-grade web applications.
+This Turborepo starter is maintained by the Turborepo core team.
 
-## Installation
-```bash
-# Clone into current directory
-git clone https://github.com/alexy-os/turbo-buildy.git .
+## Using this example
 
-# Install dependencies
-pnpm install
+Run the following command:
+
+```sh
+npx create-turbo@latest -e with-tailwind
 ```
 
-## Development
-```bash
-pnpm dev
+## What's inside?
+
+This Turborepo includes the following packages/apps:
+
+### Apps and Packages
+
+- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
+- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
+- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
+- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+
+Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+
+### Building packages/ui
+
+This example is set up to produce compiled styles for `ui` components into the `dist` directory. The component `.tsx` files are consumed by the Next.js apps directly using `transpilePackages` in `next.config.js`. This was chosen for several reasons:
+
+- Make sharing one `tailwind.config.js` to apps and packages as easy as possible.
+- Make package compilation simple by only depending on the Next.js Compiler and `tailwindcss`.
+- Ensure Tailwind classes do not overwrite each other. The `ui` package uses a `ui-` prefix for it's classes.
+- Maintain clear package export boundaries.
+
+Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update the `tailwind.config.js` in your apps to be aware of your package locations, so it can find all usages of the `tailwindcss` class names for CSS compilation.
+
+For example, in [tailwind.config.js](packages/tailwind-config/tailwind.config.js):
+
+```js
+  content: [
+    // app content
+    `src/**/*.{js,ts,jsx,tsx}`,
+    // include packages if not transpiling
+    "../../packages/ui/*.{js,ts,jsx,tsx}",
+  ],
 ```
 
-## Build
-```bash
-pnpm build
-```
+If you choose this strategy, you can remove the `tailwindcss` and `autoprefixer` dependencies from the `ui` package.
 
-## Start
-```bash
-pnpm start
-```
+### Utilities
 
-## Tech Stack
-- **Package Manager**: PNPM
-- **Framework**: Next.js 14+
-- **UI Components**: shadcn/ui
-- **Styling**: Tailwind CSS
-- **Type Safety**: TypeScript
+This Turborepo has some additional tools already setup for you:
 
-## Repository Structure
-```
-├── apps/
-│   └── web/                 # Next.js application
-│       ├── src/            # Application source code
-│       └── next.config.js   # Next.js configuration
-├── packages/
-│   └── ui/                  # Shared UI components library
-│       ├── src/            # UI components source
-│       ├── next.config.js   # Required for shadcn/ui initialization
-│       ├── components.json  # shadcn/ui configuration
-│       └── package.json     # UI package configuration
-├── package.json            # Root package configuration
-└── tsconfig.json          # TypeScript configuration with path aliases
-```
-
-## Dependencies Management
-The project uses a workspace-based monorepo structure with centralized dependency management:
-
-### Root Dependencies
-- All shared dependencies are installed in the root `node_modules`
-- No duplicate dependencies across packages
-- Managed through PNPM workspace hoisting
-
-### Workspace Setup
-```yaml
-# pnpm-workspace.yaml
-packages:
-  - 'apps/*'
-  - 'packages/*'
-```
-
-### Local Package References
-```json
-// apps/web/package.json
-{
-  "dependencies": {
-    "@pnpm-monorepo/ui": "workspace:*"
-  }
-}
-```
-
-## Initial Setup
-1. **Create Base Structure**
-```bash
-mkdir apps packages
-mkdir apps/web packages/ui
-```
-
-2. **Configure Package Files**
-> packages/ui/package.json
-```json
-{
-  "name": "@pnpm-monorepo/ui",
-  "exports": {
-    "./styles.css": "./src/styles/globals.css",
-    "./tailwind.config": "./tailwind.config.js",
-    "./*": "./src/components/ui/*.tsx",
-    "./lib/*": "./src/lib/*"
-  }
-}
-```
-
-3. **Initialize shadcn/ui**
-```bash
-# Initialize shadcn/ui
-pnpm ui:init
-
-# Add components
-pnpm ui:add button
-```
-
-## Path Aliases Usage
-```typescript
-// Import UI components
-import { Button } from "@pnpm-monorepo/ui/button";
-import { cn } from "@pnpm-monorepo/ui/lib/utils";
-
-// Import from web application
-import { Component } from "@web/components";
-```
-
-## Scripts
-```json
-{
-  "scripts": {
-    "dev": "pnpm --filter @pnpm-monorepo/web dev",
-    "build": "pnpm run build:apps",
-    "start": "pnpm run start:apps",
-    "build:packages": "pnpm --filter @pnpm-monorepo/ui build",
-    "build:apps": "pnpm --filter @pnpm-monorepo/web build",
-    "start:apps": "pnpm --filter @pnpm-monorepo/web start",
-    "lint": "pnpm --filter @pnpm-monorepo/web lint",
-    "ui:init": "pnpm dlx shadcn@latest init --cwd packages/ui",
-    "ui:add": "bash scripts/replaceImport/add-components.sh"
-  }
-}
-```
-
-## Best Practices
-- Use workspace dependencies with `workspace:*`
-- Keep shared dependencies in root package.json
-- Use proper exports in packages/ui/package.json
-- Maintain clear separation between app and UI package
-
-## Common Issues & Solutions
-- Dependencies are hoisted to root `node_modules`
-- Use proper workspace filtering for running commands
-- Make sure to use correct import paths for UI components
-
-## Requirements
-- Node.js 18+
-- PNPM 8+
-- TypeScript 5.3+
-- Next.js 14+
-
-## License
-MIT
-
-## TypeScript Configuration
-The project uses a multi-level TypeScript configuration to handle both the UI library and Next.js application:
-
-### Root Configuration
-```json
-// tsconfig.json
-{
-  "compilerOptions": {
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@pnpm-monorepo/ui": ["packages/ui/src"],
-      "@pnpm-monorepo/ui/*": ["packages/ui/src/*"],
-      "@web": ["apps/web/src"],
-      "@web/*": ["apps/web/src/*"]
-    }
-  }
-}
-```
-
-### UI Package Configuration
-```json
-// packages/ui/tsconfig.json
-{
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@pnpm-monorepo/ui/*": ["./src/*"]
-    },
-    "jsx": "react-jsx",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",
-    "target": "es6",
-    "strict": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "incremental": true
-  }
-}
-```
-
-### Next.js App Configuration
-```json
-// apps/web/tsconfig.json
-{
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "jsx": "preserve",  // Required for Next.js
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./src/*"],
-      "@pnpm-monorepo/ui": ["../../packages/ui/src"],
-      "@pnpm-monorepo/ui/*": ["../../packages/ui/src/*"]
-    }
-  }
-}
-```
-
-### TypeScript Setup Notes
-- Root config provides base paths for monorepo
-- UI package uses `react-jsx` for optimal component compilation
-- Next.js app uses `preserve` for SSR optimization
-- Path aliases are configured at each level for proper module resolution
+- [Tailwind CSS](https://tailwindcss.com/) for styles
+- [TypeScript](https://www.typescriptlang.org/) for static type checking
+- [ESLint](https://eslint.org/) for code linting
+- [Prettier](https://prettier.io) for code formatting
