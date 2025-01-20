@@ -1,6 +1,6 @@
 {
-  "name": "bunjs-monorepo-next-shadcn-ui",
-  "description": "Next.js Shadcn/UI Monorepo Starter",
+  "name": "bunjs-monorepo-next-zod-forms",
+  "description": "Next.js Shadcn/UI Monorepo Starter with Autoform and Zod",
   "version": "0.0.1",
   "author": "AlexY-OS",
   "license": "MIT",

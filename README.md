@@ -1,5 +1,7 @@
 # Bun Monorepo with Next.js and Autoform with shadcn/ui
 
+**NOTE:** This is a experimental monorepo setup with Next.js, shadcn/ui, and Autoform with Zod. Work in progress.
+
 ## Overview
 A modern monorepo setup powered by Bun runtime, featuring a Next.js application with shadcn/ui components and Autoform with Zod. This architecture provides a scalable and maintainable structure for building enterprise-grade web applications.
 
