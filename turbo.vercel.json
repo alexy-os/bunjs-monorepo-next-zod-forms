@@ -12,7 +12,8 @@
         "build/**",
         ".vercel/**",
         "out/**"
-      ]
+      ],
+      "env": ["VERCEL"]
     },
     "dev": {
       "cache": false,

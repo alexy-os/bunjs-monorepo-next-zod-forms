@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  distDir: 'out',
+  output: process.env.VERCEL ? undefined : 'export',
+  distDir: process.env.VERCEL ? '.next' : 'out',
   images: {
     unoptimized: true
   }
