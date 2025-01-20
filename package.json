@@ -1,21 +1,29 @@
 {
-  "name": "pnpm-turbo-next-zod-forms",
+  "name": "bunjs-monorepo-next-shadcn-ui",
+  "description": "Next.js Shadcn/UI Monorepo Starter",
   "version": "0.0.1",
+  "author": "AlexY-OS",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "dev": "bun run --cwd apps/web dev",
+    "build": "bun run build:apps",
+    "start": "bun run start:apps",
+    "build:packages": "bun run --cwd packages/ui build",
+    "build:apps": "bun run --cwd apps/web build",
+    "start:apps": "bun run --cwd apps/web start",
+    "lint": "bun run --cwd apps/web lint",
+    "ui:init": "bun x shadcn@latest init --cwd packages/ui",
+    "shadcn:add": "bun x shadcn@latest add --cwd packages/ui",
+    "ui:add": "bash scripts/replaceImport/add-components.sh",
+    "clean": "rm -rf node_modules",
+    "clean:all": "rm -rf node_modules **/node_modules"
   },
   "devDependencies": {
-    "@workspace/eslint-config": "workspace:*",
-    "@workspace/typescript-config": "workspace:*",
-    "prettier": "^3.2.5",
-    "turbo": "^2.3.0",
-    "typescript": "5.5.4"
-  },
-  "packageManager": "pnpm@9.12.3",
-  "engines": {
-    "node": ">=20"
+    "glob": "^11.0.1"
   }
 }

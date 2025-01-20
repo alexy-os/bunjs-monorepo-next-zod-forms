@@ -1,4 +1,15 @@
 {
-  "extends": "@workspace/typescript-config/base.json"
-}
-
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@bun-monorepo/ui": ["packages/ui/src"],
+      "@bun-monorepo/ui/*": ["packages/ui/src/*"],
+      "@web": ["apps/web/src"],
+      "@web/*": ["apps/web/src/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+} 
