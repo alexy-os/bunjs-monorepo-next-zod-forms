@@ -17,6 +17,19 @@ import {
   AlertDialogTrigger,
 } from "@bun-monorepo/ui/components/ui/alert-dialog";
 
+import { AutoForm } from "@bun-monorepo/ui/components/ui/autoform/AutoForm";
+import { z } from "zod";
+import { ZodProvider } from "@autoform/zod";
+ 
+const mySchema = z.object({
+  name: z.string(),
+  age: z.coerce.number(),
+  isHuman: z.boolean(),
+  email: z.string().email(),
+});
+
+const schemaProvider = new ZodProvider(mySchema);
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-background to-secondary/10">
@@ -46,6 +59,14 @@ export default function Home() {
               </Button>
             </div>
           </section>
+
+          <AutoForm
+            schema={schemaProvider}
+            onSubmit={(data, form) => {
+              console.log(data);
+            }}
+            withSubmit
+          />
 
           {/* Alert Dialog Section */}
           <section className="space-y-6">

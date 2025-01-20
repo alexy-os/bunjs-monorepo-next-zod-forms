@@ -8,7 +8,7 @@ When installing shadcn-ui components in a monorepo structure using `@bun-monorep
 
 ```typescript
 // Generated incorrect import
-import { cn } from "@bun-monorepo/lib/utils"
+import { cn } from "@bun-monorepo/ui/lib/utils"
 
 // Required correct import
 import { cn } from "@bun-monorepo/ui/lib/utils"

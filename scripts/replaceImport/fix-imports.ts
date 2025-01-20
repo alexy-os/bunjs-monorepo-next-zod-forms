@@ -1,7 +1,7 @@
 import { glob } from 'glob'
 import fs from 'fs/promises'
 
-const SEARCH_PATTERN = '@bun-monorepo/lib/utils'
+const SEARCH_PATTERN = '@bun-monorepo/ui/lib/utils'
 const REPLACE_PATTERN = '@bun-monorepo/ui/lib/utils'
 const componentsPath = 'packages/ui/src/components/ui'
 
