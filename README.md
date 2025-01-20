@@ -1,12 +1,12 @@
-# Bun Monorepo with Next.js and shadcn/ui
+# Bun Monorepo with Next.js and Autoform with shadcn/ui
 
 ## Overview
-A modern monorepo setup powered by Bun runtime, featuring a Next.js application with shadcn/ui components. This architecture provides a scalable and maintainable structure for building enterprise-grade web applications.
+A modern monorepo setup powered by Bun runtime, featuring a Next.js application with shadcn/ui components and Autoform with Zod. This architecture provides a scalable and maintainable structure for building enterprise-grade web applications.
 
 ## Installation
 ```bash
 # Clone into current directory
-git clone https://github.com/AlexY-OS/bunjs-monorepo-next-shadcn-ui.git .
+git clone https://github.com/alexy-os/bunjs-monorepo-next-zod-forms.git .
 
 # Install dependencies
 bun install
@@ -31,6 +31,8 @@ bun run start
 - **Runtime & Package Manager**: Bun
 - **Framework**: Next.js 14+
 - **UI Components**: shadcn/ui
+- **Form Generation**: @autoform/react
+- **Schema Validation**: Zod
 - **Styling**: Tailwind CSS
 - **Type Safety**: TypeScript
 
@@ -136,10 +138,65 @@ import { Component } from "@web/components";
 - Use proper exports in packages/ui/package.json
 - Maintain clear separation between app and UI package
 
+## Form Handling with AutoForm and Zod
+The project includes automatic form generation using AutoForm with Zod schema validation.
+
+### Setup
+```bash
+# Install required dependencies
+bun x shadcn@latest add https://raw.githubusercontent.com/vantezzen/autoform/refs/heads/main/packages/shadcn/registry/autoform.json
+```
+
+See more at https://autoform-builder.vercel.app/docs/react/getting-started
+
+### Usage Example
+```typescript
+import { AutoForm } from "@bun-monorepo/ui/components/ui/autoform/AutoForm";
+import { z } from "zod";
+import { ZodProvider } from "@autoform/zod";
+ 
+const mySchema = z.object({
+  name: z.string(),
+  age: z.coerce.number(),
+  isHuman: z.boolean(),
+  email: z.string().email(),
+});
+
+const schemaProvider = new ZodProvider(mySchema);
+
+// Use in your component
+export default function UserForm() {
+  return (
+    <AutoForm
+      schema={userSchema}
+      onSubmit={(data) => {
+        console.log(data);
+      }}
+      withSubmit
+    />
+  );
+}
+```
+
+### Key Features
+- **Automatic Form Generation**: Creates forms directly from Zod schemas
+- **Type Safety**: Full TypeScript support with inferred types
+- **Validation**: Built-in form validation using Zod
+- **Integration**: Seamlessly works with shadcn/ui components
+- **Customization**: Supports custom field components and layouts
+
+### Important Notes
+- AutoForm components must be used with the "use client" directive in Next.js
+- Compatible with react-hook-form v7.43.9
+- Supports complex form structures including nested objects and arrays
+
 ## Common Issues & Solutions
 - Only `.bin` directory is created in local `node_modules` - this is expected behavior
 - Dependencies are hoisted to root `node_modules`
 - Use `bunx` for running local binaries
+- When using AutoForm in Next.js, ensure components are marked with "use client"
+- If experiencing react-hook-form compatibility issues, ensure version 7.43.9 is installed
+- For form validation errors, check Zod schema definitions match your data structure
 
 ## Requirements
 - Bun 1.0+
