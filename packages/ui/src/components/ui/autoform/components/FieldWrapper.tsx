@@ -1,5 +1,5 @@
 import React from "react";
-import { Label } from "@bun-monorepo/components/ui/label";
+import { Label } from "@bun-monorepo/ui/components/ui/label";
 import { FieldWrapperProps } from "@autoform/react";
 
 const DISABLED_LABELS = ["boolean", "object", "array"];

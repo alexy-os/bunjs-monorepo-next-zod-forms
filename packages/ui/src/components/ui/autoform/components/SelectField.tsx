@@ -4,7 +4,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@bun-monorepo/components/ui/select";
+} from "@bun-monorepo/ui/components/ui/select";
 import { AutoFormFieldProps } from "@autoform/react";
 import React from "react";
 

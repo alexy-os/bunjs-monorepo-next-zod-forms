@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@bun-monorepo/components/ui/button";
+import { Button } from "@bun-monorepo/ui/components/ui/button";
 import { TrashIcon } from "lucide-react";
 import { ArrayElementWrapperProps } from "@autoform/react";
 

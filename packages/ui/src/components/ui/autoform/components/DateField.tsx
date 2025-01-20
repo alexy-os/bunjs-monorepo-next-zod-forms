@@ -1,4 +1,4 @@
-import { Input } from "@bun-monorepo/components/ui/input";
+import { Input } from "@bun-monorepo/ui/components/ui/input";
 import { AutoFormFieldProps } from "@autoform/react";
 import React from "react";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { AlertCircle } from "lucide-react";
 
-import { Alert, AlertTitle } from "@bun-monorepo/components/ui/alert";
+import { Alert, AlertTitle } from "@bun-monorepo/ui/components/ui/alert";
 
 export const ErrorMessage: React.FC<{ error: string }> = ({ error }) => (
   <Alert variant="destructive">

@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox } from "@bun-monorepo/components/ui/checkbox";
+import { Checkbox } from "@bun-monorepo/ui/components/ui/checkbox";
 import { AutoFormFieldProps } from "@autoform/react";
 import { Label } from "../../label";
 
