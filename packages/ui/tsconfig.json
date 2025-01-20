@@ -1,5 +1,17 @@
 {
-  "extends": "@repo/typescript-config/react-library.json",
+  "extends": "@workspace/typescript-config/react-library.json",
+  "compilerOptions": {
+    //"outDir": "dist"
+    "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@workspace/ui/*": ["./src/*"],
+      "@workspace/lib/*": ["./src/lib/*"],
+      "@workspace/ui/components/*": ["./src/components/*"],
+      "@workspace/ui/autoform/*": ["./src/components/ui/autoform/*"]
+    }
+  },
   "include": ["."],
-  "exclude": ["dist", "build", "node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
