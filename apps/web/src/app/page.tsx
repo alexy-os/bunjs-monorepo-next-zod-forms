@@ -57,16 +57,10 @@ const demoFormSchema = z.object({
       .max(1000, "Description must not exceed 1000 characters")
       .describe("Project Description // Describe your project in detail"),
     
-    projectType: z.string({
-      required_error: "Please select project type",
-      invalid_type_error: "Project type must be a string",
-    })
+    projectType: z.string()
       .describe("Project Type // Select: personal, commercial, or enterprise"),
 
-    priority: z.string({
-      required_error: "Please select priority level",
-      invalid_type_error: "Priority must be a string",
-    })
+    priority: z.string()
       .describe("Priority Level // Select: low, medium, or high"),
     
     features: z.object({
@@ -113,20 +107,6 @@ export default function Home() {
           A modern, scalable starter template for your next project
         </p>
 
-        <section className="mt-16 max-w-4xl mx-auto space-y-12">
-          <h2 className="text-2xl md:text-3xl font-semibold text-center">Form Zod Build</h2>
-          <div className="container mx-auto px-4 py-16 md:py-24">
-            <TestForm />
-          </div>
-        </section>
-
-        <section className="mt-16 max-w-4xl mx-auto space-y-12">
-          <h2 className="text-2xl md:text-3xl font-semibold text-center">Pricing Plans from Zod</h2>
-          <div className="container mx-auto px-4 py-16 md:py-24">
-            <PricingPlans />
-          </div>
-        </section>
-
         {/* Components Showcase */}
         <div className="mt-16 max-w-4xl mx-auto space-y-12">
           {/* Buttons Section */}
@@ -143,21 +123,6 @@ export default function Home() {
                 Important Action
               </Button>
             </div>
-          </section>
-
-          <section className="mt-16 max-w-4xl mx-auto space-y-12">
-            <h1 className="text-3xl font-bold mb-6">AutoForm Demo</h1>
-            <p className="text-gray-600 mb-8">
-              This is a demonstration of AutoForm's capabilities with various field types and validations.
-            </p>
-            
-            <AutoForm
-              schema={schemaProvider}
-              onSubmit={(data) => {
-                console.log("Form submitted:", data);
-                alert("Form submitted! Check console for data.");
-              }}
-            />
           </section>
 
           {/* Alert Dialog Section */}
@@ -207,6 +172,36 @@ export default function Home() {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
+          </section>
+
+          <section className="mt-16 max-w-4xl mx-auto space-y-12">
+            <h1 className="text-3xl font-bold mb-6">Testing two types of form</h1>
+            <p className="text-gray-600 mb-8">
+              This is a demonstration of AutoForm's capabilities with various field types and validations. And identify schema for the Form Builder with Zod.
+            </p>
+            <h2 className="text-2xl md:text-3xl font-semibold text-center">Example 1: AutoForm with Zod</h2>
+            
+            <AutoForm
+              schema={schemaProvider}
+              onSubmit={(data) => {
+                console.log("Form submitted:", data);
+                alert("Form submitted! Check console for data.");
+              }}
+            />
+          </section>
+
+          <section className="mt-16 max-w-4xl mx-auto space-y-12">
+            <h2 className="text-2xl md:text-3xl font-semibold text-center">Example 2: Form Builder with Zod</h2>
+            <div className="container mx-auto px-4 py-16 md:py-24">
+              <TestForm />
+            </div>
+          </section>
+
+          <section className="mt-16 max-w-4xl mx-auto space-y-12">
+            <h2 className="text-2xl md:text-3xl font-semibold text-center">Example 3: Zod Form Builder Created Pricing Plans</h2>
+            <div className="container mx-auto px-4 py-16 md:py-24">
+              <PricingPlans />
+            </div>
           </section>
         </div>
       </div>

@@ -119,7 +119,7 @@ export function PricingPlans() {
   const validatedPlans = pricingPlansSchema.parse(PRICING_PLANS);
 
   return (
-    <div className="container mx-auto py-12">
+    <div className="container mx-auto">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {validatedPlans.map((plan) => (
           <Card 
