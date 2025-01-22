@@ -2,6 +2,10 @@
 
 **NOTE:** This is a experimental monorepo setup with Next.js, shadcn/ui, and Autoform with Zod. Work in progress.
 
+## How use Zod Form Builder
+
+Read more about [shadcn-zod-form-builder](https://github.com/alexy-os/shadcn-zod-form-builder)
+
 ## Overview
 A modern monorepo setup powered by Bun runtime, featuring a Next.js application with shadcn/ui components and Autoform with Zod. This architecture provides a scalable and maintainable structure for building enterprise-grade web applications.
 
