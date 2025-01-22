@@ -20,19 +20,86 @@ import {
 } from "@bun-monorepo/ui/components/ui/alert-dialog";
 
 import { TestForm } from "@bun-monorepo/ui/components/test-form";
+import { PricingPlans } from "@bun-monorepo/ui/components/PricingPlans";
 
 import { AutoForm } from "@bun-monorepo/ui/components/ui/autoform/AutoForm";
 import { z } from "zod";
 import { ZodProvider } from "@autoform/zod";
  
-const mySchema = z.object({
-  name: z.string(),
-  age: z.coerce.number(),
-  isHuman: z.boolean(),
-  email: z.string().email(),
+const demoFormSchema = z.object({
+  // Personal Information Section
+  personalInfo: z.object({
+    fullName: z.string()
+      .min(2, "Name must be at least 2 characters")
+      .describe("Full Name // Enter your full name"),
+    email: z.string()
+      .email("Invalid email address")
+      .describe("Email Address // Your contact email"),
+    website: z.string()
+      .url("Must be a valid URL")
+      .optional()
+      .describe("Website // Your personal website (optional)"),
+    experienceYears: z.number()
+      .min(0, "Cannot be negative")
+      .max(50, "Must be less than 50 years")
+      .describe("Years of Experience // Your professional experience"),
+    expectedSalary: z.number()
+      .min(10000, "Minimum salary is 10000")
+      .max(500000, "Maximum salary is 500000")
+      .step(1000)
+      .describe("Expected Salary // Annual salary expectation"),
+  }).describe("Personal Information"),
+
+  // Project Details
+  projectDetails: z.object({
+    description: z.string()
+      .min(20, "Description must be at least 20 characters")
+      .max(1000, "Description must not exceed 1000 characters")
+      .describe("Project Description // Describe your project in detail"),
+    
+    projectType: z.string({
+      required_error: "Please select project type",
+      invalid_type_error: "Project type must be a string",
+    })
+      .describe("Project Type // Select: personal, commercial, or enterprise"),
+
+    priority: z.string({
+      required_error: "Please select priority level",
+      invalid_type_error: "Priority must be a string",
+    })
+      .describe("Priority Level // Select: low, medium, or high"),
+    
+    features: z.object({
+      responsive: z.boolean()
+        .describe("Responsive Design // Mobile-friendly layout"),
+      accessibility: z.boolean()
+        .describe("Accessibility // WCAG compliance"),
+      darkMode: z.boolean()
+        .describe("Dark Mode // Theme switching support"),
+      multilingual: z.boolean()
+        .describe("Multilingual // Multiple language support"),
+      analytics: z.boolean()
+        .describe("Analytics // Usage tracking and reporting"),
+    }).describe("Project Features"),
+
+    teamSize: z.number()
+      .min(1, "Team must have at least 1 person")
+      .max(100, "Team size cannot exceed 100")
+      .step(1)
+      .describe("Team Size // Number of team members"),
+
+    startDate: z.coerce.date()
+      .min(new Date("2000-01-01"), "Date must be after 2000")
+      .max(new Date(), "Date cannot be in the future")
+      .describe("Start Date // When did you start?"),
+    
+    agreeToTerms: z.boolean()
+      .refine((val) => val === true, "You must agree to the terms")
+      .describe("Terms Agreement // I agree to the terms and conditions"),
+  }).describe("Project Details"),
 });
 
-const schemaProvider = new ZodProvider(mySchema);
+const schemaProvider = new ZodProvider(demoFormSchema);
 
 export default function Home() {
   return (
@@ -47,9 +114,16 @@ export default function Home() {
         </p>
 
         <section className="mt-16 max-w-4xl mx-auto space-y-12">
-          <h2 className="text-2xl md:text-3xl font-semibold text-center">Interactive Components</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold text-center">Form Zod Build</h2>
           <div className="container mx-auto px-4 py-16 md:py-24">
             <TestForm />
+          </div>
+        </section>
+
+        <section className="mt-16 max-w-4xl mx-auto space-y-12">
+          <h2 className="text-2xl md:text-3xl font-semibold text-center">Pricing Plans from Zod</h2>
+          <div className="container mx-auto px-4 py-16 md:py-24">
+            <PricingPlans />
           </div>
         </section>
 
@@ -71,13 +145,20 @@ export default function Home() {
             </div>
           </section>
 
-          <AutoForm
-            schema={schemaProvider}
-            onSubmit={(data, form) => {
-              console.log(data);
-            }}
-            withSubmit
-          />
+          <section className="mt-16 max-w-4xl mx-auto space-y-12">
+            <h1 className="text-3xl font-bold mb-6">AutoForm Demo</h1>
+            <p className="text-gray-600 mb-8">
+              This is a demonstration of AutoForm's capabilities with various field types and validations.
+            </p>
+            
+            <AutoForm
+              schema={schemaProvider}
+              onSubmit={(data) => {
+                console.log("Form submitted:", data);
+                alert("Form submitted! Check console for data.");
+              }}
+            />
+          </section>
 
           {/* Alert Dialog Section */}
           <section className="space-y-6">
