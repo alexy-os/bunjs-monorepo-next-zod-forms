@@ -15,7 +15,8 @@
     "utils": "@bun-monorepo/ui/lib/utils",
     "ui": "@bun-monorepo/ui/components/ui",
     "lib": "@bun-monorepo/ui/lib",
-    "hooks": "@bun-monorepo/ui/hooks"
+    "hooks": "@bun-monorepo/ui/hooks",
+    "form": "@/components/form"
   },
   "iconLibrary": "lucide"
 }

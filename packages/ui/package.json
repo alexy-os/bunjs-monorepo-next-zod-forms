@@ -31,6 +31,7 @@
     "lucide-react": "^0.471.1",
     "react-day-picker": "8.10.1",
     "react-hook-form": "7.43.9",
+    "shadcn-zod-form-builder": "^0.0.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.1"

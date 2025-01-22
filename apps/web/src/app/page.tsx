@@ -19,6 +19,8 @@ import {
   AlertDialogTrigger,
 } from "@bun-monorepo/ui/components/ui/alert-dialog";
 
+import { TestForm } from "@bun-monorepo/ui/components/test-form";
+
 import { AutoForm } from "@bun-monorepo/ui/components/ui/autoform/AutoForm";
 import { z } from "zod";
 import { ZodProvider } from "@autoform/zod";
@@ -43,6 +45,13 @@ export default function Home() {
         <p className="mt-6 text-center text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
           A modern, scalable starter template for your next project
         </p>
+
+        <section className="mt-16 max-w-4xl mx-auto space-y-12">
+          <h2 className="text-2xl md:text-3xl font-semibold text-center">Interactive Components</h2>
+          <div className="container mx-auto px-4 py-16 md:py-24">
+            <TestForm />
+          </div>
+        </section>
 
         {/* Components Showcase */}
         <div className="mt-16 max-w-4xl mx-auto space-y-12">
